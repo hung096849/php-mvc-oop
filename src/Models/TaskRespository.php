@@ -3,23 +3,29 @@ namespace MVC\Models;
 use MVC\Models\TaskResourceModel;
 use MVC\Config\Database;
 use PDO;
-class TaskRespository extends Task implements TaskResourceModel {
-
+class TaskRespository extends Task  {
+   
     public function add($model){
-        $this->model=$model;
+        // $taskResourceModel=new TaskResourceModel();
+        // return  $taskResourceModel->add($model);
+        $taskResourceModel=new TaskResourceModel();
+        return $taskResourceModel->save($model);
     }
     public function edit($model){
-        $this->model=$model;
+        $taskResourceModel=new TaskResourceModel();
+        return $taskResourceModel->save($model);
     }
     public function get($id){
-        $this->id=$id;
+        $taskResourceModel=new TaskResourceModel();
+        return $taskResourceModel->get($id);
     }
-    public function delete($model){
-        $this->model=$model;
+    public function delete($id){
+        $taskResourceModel=new TaskResourceModel();
+        return $taskResourceModel->delete($id);
     }
     public function getAll($model){
-        $this->model=$model;
-        
+        $taskResourceModel=new TaskResourceModel();
+        return $taskResourceModel->getAll($model);
     }
     
 }

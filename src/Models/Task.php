@@ -4,21 +4,57 @@ use MVC\Core\Model;
 use MVC\Config\Database;
 class Task extends Model
 {
-    private $id;
-    private $title;
-    private $description;
-    public function __set($id, $title,$description)
-    {
-        $this->id=$id;
-        $this->title=$title;
-        $this->description=$description;
-    }
-    public function __get()
-    {
-       return  $this->id;
-       return   $this->title;
-       return   $this->description;
-    }
+    protected int $id;
+    protected string $title;
+    protected string $description;
+    protected string $created_at;
+    protected string $updated_at;
+//    function __construct( string $title="")
+//    {
+//        $this->title=$title;
+//    }
+   public function getData($data){
+       return $this->{$data}; 
+   }
+   public function getId(){
+    return $this->id;
+   }
+   public function setId($id){
+    $this->id=$id;
+}
+   public function getTitle(){
+       return $this->title;
+   }
+   public function setData($data=null,$value=null){
+       if(gettype($data)!="array"){
+           $this->{$data}=$value;
+       }else{
+           foreach ($data as $key => $value2){
+               $this->{$key}= $value2;
+           }
+       }
+   }
+   public function setTitle($title){
+       $this->title=$title;
+   }
+   public function setDes($description){
+       $this->description=$description;
+   }
+   public function getDes(){
+       return $this->description;
+   }
+   public function setCreatedAt($created_at){
+     $this->created_at=$created_at;
+   }
+   public function getCreatedAt(){
+    return $this->created_at;
+   }
+   public function setUpdatedAt($updated_at){
+    $this->updated_at=$updated_at;
+  }
+  public function getUpdatedAt(){
+   return $this->updated_at;
+  }
     // public function create($title, $description)
     // {
     //     $sql = "INSERT INTO tasks (title, description, created_at, updated_at) VALUES (:title, :description, :created_at, :updated_at)";

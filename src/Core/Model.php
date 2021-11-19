@@ -3,8 +3,8 @@
     class Model
     {
       
-     public function getProperties($object){
-        return get_object_vars($object);
+     public function getProperties(){
+        return get_object_vars($this);
       }
       
     }

@@ -14,12 +14,16 @@
         <?php
         foreach ($students as $student)
         {
+            $id         = $student->getId();
+            $name      = $student->getName();
+            $dob       = $student->getDob();
+            $sex       = $student->getSex();
             echo '<tr>';
-            echo "<td>" . $student['studentId'] . "</td>";
-            echo "<td>" . $student['name'] . "</td>";
-            echo "<td>" . $student['dob'] . "</td>";
-            echo "<td>" . ($student['sex']==1?"Male":"Female") . "</td>";
-            echo "<td class='text-center'><a class='btn btn-info btn-xs' href='/mvc/students/edit/" . $student["studentId"] . "' ><span class='glyphicon glyphicon-edit'></span> Edit</a> <a href='/mvc/students/delete/" . $student["studentId"] . "' class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-remove'></span> Del</a></td>";
+            echo "<td>" .$id . "</td>";
+            echo "<td>" .$name . "</td>";
+            echo "<td>" .$dob . "</td>";
+            echo "<td>" . ($sex==1?"Male":"Female") . "</td>";
+            echo "<td class='text-center'><a class='btn btn-info btn-xs' href='/mvc/students/edit/" . $id . "' ><span class='glyphicon glyphicon-edit'></span> Edit</a> <a href='/mvc/students/delete/" . $id. "' class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-remove'></span> Del</a></td>";
             echo "</tr>";
         }
         ?>

@@ -5,7 +5,7 @@ use MVC\Models\Task;
 class TaskResourceModel extends ResourceModel {
 
     public function __construct() {
-        $this->_init("task", "taskId");
+        $this->_init('tasks','id',new Task());
     }
-    
+  
     }

@@ -2,12 +2,12 @@
 <form method='post' action='#'>
     <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" placeholder="Enter a name" name="name" value ="<?php if (isset($student["name"])) echo $student["name"];?>">
+        <input type="text" class="form-control" id="name" placeholder="Enter a name" name="name" value ="<?php if (isset($student)) echo $student->getName();?>">
     </div>
 
     <div class="form-group">
         <label for="dob">Dob</label>
-        <input type="date" class="form-control" id="dob" placeholder="Enter a dob" name="dob" value ="<?php if (isset($student["dob"])) echo $student["dob"];?>">
+        <input type="date" class="form-control" id="dob" placeholder="Enter a dob" name="dob" value ="<?php if (isset($student)) echo $student->getDob();?>">
     </div>
 
     
@@ -15,13 +15,13 @@
       <legend class="col-form-label col-sm-2 pt-0">SEX</legend>
       <div class="col-sm-10">
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="sex" id="sex" value=<?php if (isset($student["sex"])) echo $student["sex"];?> checked>
+          <input class="form-check-input" type="radio" name="sex" id="sex" value=<?php if (isset($student)) echo $student->getSex();?> checked>
           <label class="form-check-label" for="mail">
             mail
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="sex" id="sex" value=<?php if (isset($student["sex"])) echo $student["sex"];?>>
+          <input class="form-check-input" type="radio" name="sex" id="sex" value=<?php if (isset($student)) echo $student->getSex();?>checked>
           <label class="form-check-label" for="femail">
           Femail
           </label>

@@ -20,7 +20,7 @@ class ResourceModel implements ResourceModelInterface {
         $sql = "SELECT * FROM $myTable";
         $req = Database::getBdd()->prepare($sql);
         $req->execute();
-        return $req->fetchAll($req->fectchAll(PDO::FETCH_CLASS, $myClass));
+        return $req->fetchAll(PDO::FETCH_CLASS, $myClass);
     }
     public function get($id){
         $myId=$this->id;
@@ -40,28 +40,26 @@ class ResourceModel implements ResourceModelInterface {
        
     }
     public function save($model) {
-        ///đầu tiên get object var biến model thành array giống dòng 49
-        ///biến array thành string giống dòng 56
-          $properties= $model->getProperties($model);
+          $arrayModel= $model->getProperties($model);
           $myId=$this->id;
           $myTable=$this->table;
-          $arrayModel = array(
-            "id"=>"null",
-            "title"=>"This is title",
-            "name"=>"This is name"
-        );
-        $a=implode("",$arrayModel);
-        $b=str_replace($arrayModel,$a,"id=:id,title=:title,name=:name");
-        //   $arrayModel = array($model);
-        //   $string=is_string($properties);
-          $id = $arrayModel[$myId];
-          $stringModel = "title=:title, name=:name";
-          if($arrayModel["myId"]==null){
+          $stringModel = "" ;
+          foreach($arrayModel as $key =>$value){
+              $stringModel .= $key . "=:".$key;
+              $stringModel .=",";
+          }
+          $stringModel =substr($stringModel, 0, -1);
+          echo '<pre>';
+        
+          if(!isset($arrayModel[$this->id])||($arrayModel[$this->id]==null)){
               $sql= "INSERT INTO $myTable SET $stringModel";
           }else{
+              $id = $arrayModel[$myId];
               $sql = "UPDATE $myTable SET $stringModel WHERE $myId= $id";
           }
           $req = Database::getBdd()->prepare($sql);
+          print_r($arrayModel);
+          echo $sql;
           return $req->execute($arrayModel);
          }
    
