@@ -1,9 +1,12 @@
 <?php
+
 namespace MVC\Controllers;
+
 use MVC\Core\Controller;
 use MVC\Models\Task;
 use MVC\Models\TaskRespository;
-class tasksController extends  Controller 
+
+class TasksController extends  Controller
 {
     // $taskResourceModel = new \MVC\TaskResourceModel();
     // public function save($model) {
@@ -21,50 +24,48 @@ class tasksController extends  Controller
     function create()
     {
 
-        if (isset($_POST["title"]))
-        {
+        if (isset($_POST["title"])) {
             // $task= new TaskRespository();
-            $task= new Task();
-           $title= $_POST["title"];
-           $description=$_POST["description"];
-           $created_at=date('Y-m-d h:i:sa');
-           $updated_at=date('Y-m-d h:i:sa');
-          $task->setTitle($title);
-          $task->setDes($description);
-          $task->setCreatedAt($created_at);
-          $task->setUpdatedAt($updated_at);
-        //   echo '<pre>';
-        //   print_r($task);
-        // die;
-     
-           $taskrespo= new TaskRespository();
+            $task = new Task();
+            $title = $_POST["title"];
+            $description = $_POST["description"];
+            $created_at = date('Y-m-d h:i:sa');
+            $updated_at = date('Y-m-d h:i:sa');
+            $task->setTitle($title);
+            $task->setDes($description);
+            $task->setCreatedAt($created_at);
+            $task->setUpdatedAt($updated_at);
+            //   echo '<pre>';
+            //   print_r($task);
+            // die;
+
+            $taskrespo = new TaskRespository();
             // if ($task->create($_POST["title"], $_POST["description"]))
-            $taskrespo->add($task);
-            
+            if ($taskrespo->add($task)) {
                 header("Location: " . WEBROOT . "tasks/index");
-            
+            }
         }
         $this->render("create");
     }
     function edit($id)
     {
-        
-        $taskrespo= new TaskRespository();
+
+        $taskrespo = new TaskRespository();
         // $d["task"] = $task->showTask($id);
         $d["task"] = $taskrespo->get($id);
-        if (isset($_POST["title"]))
-        {
-            $task= new Task();
-            $title= $_POST["title"];
-            $description=$_POST["description"];
-            $created_at=date('Y-m-d h:i:sa');
-            $updated_at=date('Y-m-d h:i:sa');
-           $task->setTitle($title);
-           $task->setDes($description);
-           $task->setCreatedAt($created_at);
-           $task->setUpdatedAt($updated_at);
-           $taskrespo->edit($task);
-           header("Location: " . WEBROOT . "tasks/index");
+        if (isset($_POST["title"])) {
+            $task = new Task();
+            $title = $_POST["title"];
+            $description = $_POST["description"];
+            $created_at = date('Y-m-d h:i:sa');
+            $updated_at = date('Y-m-d h:i:sa');
+            $task->setTitle($title);
+            $task->setDes($description);
+            $task->setCreatedAt($created_at);
+            $task->setUpdatedAt($updated_at);
+            if ($taskrespo->edit($task)) {
+                header("Location: " . WEBROOT . "tasks/index");
+            }
         }
         $this->set($d);
         $this->render("edit");
@@ -74,8 +75,7 @@ class tasksController extends  Controller
         require(ROOT . 'Models/Task.php');
         // $task = new Task();
         $task = new TaskRespository();
-         $task->delete($id);
+        $task->delete($id);
         header("Location: " . WEBROOT . "tasks/index");
     }
 }
-?>

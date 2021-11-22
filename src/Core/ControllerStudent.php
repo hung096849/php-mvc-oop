@@ -15,7 +15,7 @@
             extract($this->vars);
             ob_start();
             // require(ROOT . "Views/" . ucfirst(str_replace('MVC\Controllers\tasksController', 'Tasks', get_class($this))) . '/' . $filename . '.php');
-            require(ROOT . "Views/" . ucfirst(str_replace('MVC\Controllers\studentsController', 'Students', get_class($this))) . '/' . $filename . '.php');
+            require(ROOT . "Views/" . ucfirst(str_replace('MVC\Controllers\StudentsController', 'Students', get_class($this))) . '/' . $filename . '.php');
 
             // echo "<br>";
             // echo(ROOT . "Views/Tasks/index.php");

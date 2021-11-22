@@ -100,4 +100,3 @@ public function getSex(){
     //     return $req->execute([$id]);
     // }
 }
-?>

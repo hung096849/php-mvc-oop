@@ -1,14 +1,17 @@
 <?php
+
 namespace MVC\Controllers;
+
 use MVC\Core\ControllerStudent;
 use MVC\Models\Student;
 use MVC\Models\StudentRespository;
-class studentsController extends  ControllerStudent
+
+class StudentsController extends  ControllerStudent
 {
-    
+
     function index()
     {
-       
+
 
         // $students = new Student();
         $students = new StudentRespository();
@@ -20,18 +23,18 @@ class studentsController extends  ControllerStudent
 
     function create()
     {
-        if (isset($_POST["name"]))
-        {
-            $student= new Student();
-            $name= $_POST["name"];
-            $dob=$_POST["dob"];
-            $sex=$_POST["sex"];
+        if (isset($_POST["name"])) {
+            $student = new Student();
+            $name = $_POST["name"];
+            $dob = $_POST["dob"];
+            $sex = $_POST["sex"];
             $student->setName($name);
             $student->setDob($dob);
             $student->setSex($sex);
-            $studentrespo=new StudentRespository();
-            $studentrespo->add($student);
-            header("Location: " . WEBROOT . "students/index");
+            $studentrespo = new StudentRespository();
+            if ($studentrespo->add($student)) {
+                header("Location: " . WEBROOT . "students/index");
+            }
         }
 
         $this->render("create");
@@ -39,21 +42,19 @@ class studentsController extends  ControllerStudent
 
     function edit($id)
     {
-        $student= new Student();
-        $studentrespo= new StudentRespository();
+        $student = new Student();
+        $studentrespo = new StudentRespository();
         // $d["student"] = $student->showStudent($id);
         $d["student"] = $studentrespo->get($id);
-        if (isset($_POST["name"]))
-        {
-            $name= $_POST["name"];
-            $dob=$_POST["dob"];
-            $sex=$_POST["sex"];
+        if (isset($_POST["name"])) {
+            $name = $_POST["name"];
+            $dob = $_POST["dob"];
+            $sex = $_POST["sex"];
             $student->setName($name);
             $student->setDob($dob);
             $student->setSex($sex);
             $studentrespo->edit($student);
-                header("Location: " . WEBROOT . "students/index");
-            
+            header("Location: " . WEBROOT . "students/index");
         }
         $this->set($d);
         $this->render("edit");
@@ -64,10 +65,8 @@ class studentsController extends  ControllerStudent
         require(ROOT . 'Models/Student.php');
         // $student = new Student();
         $student = new StudentRespository();
-       $student->delete($id);
-        
-         header("Location: " . WEBROOT . "students/index");
-        
+        $student->delete($id);
+
+        header("Location: " . WEBROOT . "students/index");
     }
 }
-?>
